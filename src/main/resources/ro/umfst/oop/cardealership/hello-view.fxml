@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:controller="ro.umfst.oop.cardealership.DealershipController"
+      spacing="10" xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      prefWidth="600" prefHeight="500">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15" />
+    </padding>
+
+    <Label text="New Inventory Entry:" style="-fx-font-weight: bold;" />
+
+    <HBox spacing="10">
+
+        <TextField fx:id="makeField" promptText="Make" HBox.hgrow="ALWAYS" />
+        <TextField fx:id="modelField" promptText="Model" HBox.hgrow="ALWAYS" />
+        <TextField fx:id="priceField" promptText="Price" prefWidth="100" />
+        <CheckBox fx:id="isMotoCheckBox" text="Is Motorcycle?" alignment="CENTER_LEFT" />
+    </HBox>
+
+    <Button fx:id="addButton" text="Add Vehicle" onAction="#onAddVehiclePress" maxWidth="Infinity" />
+
+    <Label fx:id="statusLabel" text="Total Vehicles: 0" />
+
+    <Separator />
+
+    <Label text="Current Stock:" style="-fx-font-weight: bold;" />
+
+    <ListView fx:id="listView" onMouseClicked="#onListSelection" VBox.vgrow="ALWAYS" />
+
+    <Label text="Selected Details:" />
+    <TextArea fx:id="detailsArea" prefHeight="100" editable="false" />
+
+</VBox>
