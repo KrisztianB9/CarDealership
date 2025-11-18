@@ -23,7 +23,6 @@
     <Label text="New Inventory Entry:" style="-fx-font-weight: bold;" />
 
     <HBox spacing="10">
-
         <TextField fx:id="makeField" promptText="Make" HBox.hgrow="ALWAYS" />
         <TextField fx:id="modelField" promptText="Model" HBox.hgrow="ALWAYS" />
         <TextField fx:id="priceField" promptText="Price" prefWidth="100" />
@@ -39,6 +38,8 @@
     <Label text="Current Stock:" style="-fx-font-weight: bold;" />
 
     <ListView fx:id="listView" onMouseClicked="#onListSelection" VBox.vgrow="ALWAYS" />
+    <Button text="Sell Selected Vehicle" onAction="#onSellVehiclePress"
+            maxWidth="Infinity" style="-fx-text-fill: red; -fx-border-color: red;" />
 
     <Label text="Selected Details:" />
     <TextArea fx:id="detailsArea" prefHeight="100" editable="false" />

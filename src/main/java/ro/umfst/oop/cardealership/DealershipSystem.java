@@ -18,7 +18,7 @@ public class DealershipSystem extends Application {
 
             Scene scene = new Scene(root, 600, 500);
 
-            primaryStage.setTitle("Dealership Management System (FXML)");
+            primaryStage.setTitle("Dealership Management System");
             primaryStage.setScene(scene);
             primaryStage.show();
 

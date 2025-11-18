@@ -23,6 +23,12 @@ public abstract class Vehicle implements Stockable {
         return totalVehicles;
     }
 
+    public static void decrementTotal() {
+        if (totalVehicles > 0) {
+            totalVehicles--;
+        }
+    }
+
     public abstract String getVehicleType();
 
     public double getPrice() {
