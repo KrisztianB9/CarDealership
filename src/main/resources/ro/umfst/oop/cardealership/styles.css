@@ -1,0 +1,133 @@
+/* Main Background */
+.root {
+    -fx-background-color: #2b2b2b;
+    -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* Labels */
+.label {
+    -fx-text-fill: #e0e0e0;
+}
+
+.header-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 0 0 10 0;
+}
+
+.section-header {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #8ab4f8; /* Google Blue-ish */
+}
+
+/* Text Fields */
+.text-field {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #888888;
+    -fx-background-radius: 4;
+    -fx-border-color: #555555;
+    -fx-border-radius: 4;
+}
+
+.text-field:focused {
+    -fx-border-color: #8ab4f8;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #365880;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #406a99;
+}
+
+.button:pressed {
+    -fx-background-color: #2b4b6e;
+}
+
+/* Specific Danger Button Style (Sell) */
+.danger-button {
+    -fx-background-color: #2b2b2b; /* Transparent-ish dark */
+    -fx-text-fill: #ff6b6b;
+    -fx-border-color: #ff6b6b;
+    -fx-border-radius: 4;
+}
+
+.danger-button:hover {
+    -fx-background-color: #ff6b6b;
+    -fx-text-fill: #2b2b2b;
+}
+
+/* List View */
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #555555;
+    -fx-border-radius: 4;
+}
+
+.list-view .list-cell {
+    -fx-background-color: #323232;
+    -fx-text-fill: #e0e0e0;
+    -fx-padding: 8px;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: #3c3f41;
+}
+
+.list-view .list-cell:filled:selected:focused,
+.list-view .list-cell:filled:selected {
+    -fx-background-color: #0f4c75;
+    -fx-text-fill: white;
+}
+
+/* Text Area (Details) */
+.text-area {
+    -fx-background-color: transparent;
+}
+
+.text-area .content {
+    -fx-background-color: #1e1e1e;
+    -fx-background-radius: 4;
+}
+
+.text-area:focused .content {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #8ab4f8;
+    -fx-border-radius: 4;
+}
+
+.text-area .text {
+    -fx-fill: #98c379; /* Code-like green */
+    -fx-font-family: 'Consolas', 'Monospaced';
+}
+
+/* Separator */
+.separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: #444444;
+}
+
+/* Checkbox */
+.check-box .box {
+    -fx-background-color: #3c3f41;
+    -fx-border-color: #555555;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.check-box .text {
+    -fx-fill: #e0e0e0;
+}

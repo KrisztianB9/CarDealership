@@ -37,6 +37,6 @@ public abstract class Vehicle implements Stockable {
     @Override
     public String toString() {
 
-        return getVehicleType() + ": " + make + " " + model + " ($" + price + ")";
+        return make + " " + model + " (€" + price + ")";
     }
 }
