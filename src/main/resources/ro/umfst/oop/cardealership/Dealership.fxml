@@ -26,21 +26,20 @@
         <Insets top="20" right="20" bottom="20" left="20" />
     </padding>
 
-    <!-- HEADER -->
     <Label text="Dealership Manager" styleClass="header-label" />
 
-    <!-- INPUT SECTION -->
     <VBox spacing="10" style="-fx-background-color: #323232; -fx-padding: 15; -fx-background-radius: 5;">
         <Label text="Add New Vehicle" styleClass="section-header" />
 
         <HBox spacing="10" alignment="CENTER_LEFT">
             <TextField fx:id="makeField" promptText="Make" HBox.hgrow="ALWAYS" />
             <TextField fx:id="modelField" promptText="Model" HBox.hgrow="ALWAYS" />
-            <TextField fx:id="priceField" promptText="Price ($)" prefWidth="100" />
+            <TextField fx:id="priceField" promptText="Price (€)" prefWidth="100" />
         </HBox>
 
         <HBox spacing="10" alignment="CENTER_LEFT">
             <CheckBox fx:id="isMotoCheckBox" text="Is Motorcycle?" />
+            <CheckBox fx:id="hasSidecarCheckBox" text="Has Sidecar" disable="true" />
             <Region HBox.hgrow="ALWAYS" />
             <Button fx:id="addButton" text="+ Add to Stock" onAction="#onAddVehiclePress" prefWidth="150"/>
         </HBox>
@@ -52,17 +51,13 @@
 
     <Separator />
 
-    <!-- SPLIT LIST SECTION -->
     <Label text="Current Inventory" styleClass="section-header" />
 
     <HBox spacing="15" VBox.vgrow="ALWAYS">
-        <!-- Cars Column -->
         <VBox spacing="5" HBox.hgrow="ALWAYS">
             <Label text="Cars" style="-fx-font-weight: bold; -fx-text-fill: #8ab4f8;" />
             <ListView fx:id="carListView" onMouseClicked="#onCarListSelection" VBox.vgrow="ALWAYS" />
         </VBox>
-
-        <!-- Motorcycles Column -->
         <VBox spacing="5" HBox.hgrow="ALWAYS">
             <Label text="Motorcycles" style="-fx-font-weight: bold; -fx-text-fill: #8ab4f8;" />
             <ListView fx:id="motoListView" onMouseClicked="#onMotoListSelection" VBox.vgrow="ALWAYS" />
@@ -72,7 +67,6 @@
     <Button text="Sell Selected Vehicle" onAction="#onSellVehiclePress"
             maxWidth="Infinity" styleClass="danger-button" />
 
-    <!-- DETAILS SECTION -->
     <VBox spacing="5">
         <Label text="Vehicle Details" styleClass="section-header" />
         <TextArea fx:id="detailsArea" prefHeight="100" editable="false" wrapText="true"/>

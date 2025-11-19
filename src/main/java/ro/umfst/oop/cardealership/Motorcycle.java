@@ -26,4 +26,13 @@ public class Motorcycle extends Vehicle {
         String prefix = (make != null && make.length() >= 2) ? make.substring(0, 3) : "XXX";
         return "MOTO-" + prefix.toUpperCase();
     }
+
+    @Override
+    public String toString() {
+        String baseInfo = super.toString();
+        if (hasSidecar) {
+            return baseInfo + " [with Sidecar]";
+        }
+        return baseInfo;
+    }
 }

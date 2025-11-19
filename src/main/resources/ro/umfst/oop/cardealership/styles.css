@@ -1,11 +1,9 @@
-/* Main Background */
 .root {
     -fx-background-color: #2b2b2b;
     -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
     -fx-font-size: 14px;
 }
 
-/* Labels */
 .label {
     -fx-text-fill: #e0e0e0;
 }
@@ -23,7 +21,6 @@
     -fx-text-fill: #8ab4f8; /* Google Blue-ish */
 }
 
-/* Text Fields */
 .text-field {
     -fx-background-color: #3c3f41;
     -fx-text-fill: white;
@@ -37,7 +34,6 @@
     -fx-border-color: #8ab4f8;
 }
 
-/* Buttons */
 .button {
     -fx-background-color: #365880;
     -fx-text-fill: white;
@@ -54,7 +50,6 @@
     -fx-background-color: #2b4b6e;
 }
 
-/* Specific Danger Button Style (Sell) */
 .danger-button {
     -fx-background-color: #2b2b2b; /* Transparent-ish dark */
     -fx-text-fill: #ff6b6b;
@@ -67,7 +62,6 @@
     -fx-text-fill: #2b2b2b;
 }
 
-/* List View */
 .list-view {
     -fx-background-color: transparent;
     -fx-border-color: #555555;
@@ -90,9 +84,9 @@
     -fx-text-fill: white;
 }
 
-/* Text Area (Details) */
 .text-area {
     -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
 }
 
 .text-area .content {
@@ -107,18 +101,16 @@
 }
 
 .text-area .text {
-    -fx-fill: #98c379; /* Code-like green */
+    -fx-fill: #ffffff;
     -fx-font-family: 'Consolas', 'Monospaced';
 }
 
-/* Separator */
 .separator *.line {
     -fx-border-style: solid;
     -fx-border-width: 1px;
     -fx-border-color: #444444;
 }
 
-/* Checkbox */
 .check-box .box {
     -fx-background-color: #3c3f41;
     -fx-border-color: #555555;

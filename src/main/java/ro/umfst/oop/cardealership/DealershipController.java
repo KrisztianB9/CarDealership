@@ -18,6 +18,7 @@ public class DealershipController {
     @FXML private TextField modelField;
     @FXML private TextField priceField;
     @FXML private CheckBox isMotoCheckBox;
+    @FXML private CheckBox hasSidecarCheckBox;
     @FXML private Label statusLabel;
 
     @FXML private ListView<Vehicle> carListView;
@@ -29,6 +30,14 @@ public class DealershipController {
     public void initialize() {
         carListView.setItems(carInventory);
         motoListView.setItems(motoInventory);
+        //ha nincs becsekkolva a motor, ne lehessen a masik checkboxot hasznalni
+        hasSidecarCheckBox.disableProperty().bind(isMotoCheckBox.selectedProperty().not());
+        //ha kicsekkolodik a motor, kicsekkolja a masik checkboxot is
+        isMotoCheckBox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+            if (!isNowSelected) {
+                hasSidecarCheckBox.setSelected(false);
+            }
+        });
 
         DatabaseHandler.initializeDB();
         refreshListsFromDB();
@@ -67,7 +76,8 @@ public class DealershipController {
             double price = Double.parseDouble(priceField.getText());
 
             if (isMotoCheckBox.isSelected()) {
-                DatabaseHandler.addVehicleRaw("Motorcycle", make, model, price, 0);
+                int extra = hasSidecarCheckBox.isSelected() ? 1 : 0;
+                DatabaseHandler.addVehicleRaw("Motorcycle", make, model, price, extra);
             } else {
                 DatabaseHandler.addVehicleRaw("Car", make, model, price, 4);
             }
@@ -75,6 +85,7 @@ public class DealershipController {
             refreshListsFromDB();
 
             makeField.clear(); modelField.clear(); priceField.clear();
+            isMotoCheckBox.setSelected(false);
 
         } catch (NumberFormatException nfe) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
