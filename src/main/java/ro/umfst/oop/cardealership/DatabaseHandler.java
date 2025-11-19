@@ -96,7 +96,7 @@ public class DatabaseHandler {
 
                 try {
                     if (type.equals("Car")) {
-                        list.add(new Car(make, model, price, extra)); // Extra is doors
+                        list.add(new Car(make, model, price, extra));
                     } else if (type.equals("Motorcycle")) {
                         boolean hasSidecar = (extra == 1);
                         list.add(new Motorcycle(make, model, price, hasSidecar));
