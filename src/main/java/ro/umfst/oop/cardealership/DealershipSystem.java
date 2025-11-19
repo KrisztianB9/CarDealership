@@ -28,6 +28,7 @@ public class DealershipSystem extends Application {
 
             primaryStage.setTitle("Dealership Management System");
             primaryStage.setScene(scene);
+            primaryStage.setMaximized(true);
             primaryStage.show();
 
         } catch (IOException e) {
