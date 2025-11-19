@@ -8,6 +8,13 @@ public class Motorcycle extends Vehicle {
         this.hasSidecar = hasSidecar;
     }
 
+    public int getHasSidecar() {
+        if (hasSidecar) {
+            return 1;
+        }
+        return 0;
+    }
+
     @Override
     public String getVehicleType() {
 
@@ -16,7 +23,7 @@ public class Motorcycle extends Vehicle {
 
     @Override
     public String getStockLabel() {
-        String prefix = (make != null && make.length() >= 2) ? make.substring(0, 4) : "XXXX";
+        String prefix = (make != null && make.length() >= 2) ? make.substring(0, 3) : "XXX";
         return "MOTO-" + prefix.toUpperCase();
     }
 }

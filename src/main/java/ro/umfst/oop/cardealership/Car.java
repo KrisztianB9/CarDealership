@@ -19,9 +19,13 @@ public class Car extends Vehicle {
         return "Car";
     }
 
+    public int getDoors() {
+        return doors;
+    }
+
     @Override
     public String getStockLabel() {
-        String prefix = (make != null && make.length() >= 2) ? make.substring(0, 4) : "XXXX";
+        String prefix = (make != null && make.length() >= 2) ? make.substring(0, 3) : "XXX";
         return "CAR-" + prefix.toUpperCase();
     }
 

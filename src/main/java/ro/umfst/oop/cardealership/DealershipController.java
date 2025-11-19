@@ -5,10 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import java.util.List;
 
 public class DealershipController {
 
-    // Two separate lists for the two ListViews
     private ObservableList<Vehicle> carInventory = FXCollections.observableArrayList();
     private ObservableList<Vehicle> motoInventory = FXCollections.observableArrayList();
 
@@ -20,7 +20,6 @@ public class DealershipController {
     @FXML private CheckBox isMotoCheckBox;
     @FXML private Label statusLabel;
 
-    // Changed from one listView to two
     @FXML private ListView<Vehicle> carListView;
     @FXML private ListView<Vehicle> motoListView;
 
@@ -28,22 +27,27 @@ public class DealershipController {
 
     @FXML
     public void initialize() {
-        // Link the data lists to their respective UI elements
         carListView.setItems(carInventory);
         motoListView.setItems(motoInventory);
 
-        // Preload Data
-        try {
-            carInventory.add(new Car("Toyota", "Corolla", 22500.00));
-            carInventory.add(new Car("Ford", "Mustang", 35000.00, 2));
+        DatabaseHandler.initializeDB();
+        refreshListsFromDB();
+    }
 
-            motoInventory.add(new Motorcycle("Kawasaki", "Ninja", 15000.00, false));
-            motoInventory.add(new Motorcycle("Ural", "Gear Up", 18500.00, true));
+    private void refreshListsFromDB() {
+        carInventory.clear();
+        motoInventory.clear();
+        Vehicle.totalVehicles = 0;
 
-        } catch (InvalidPriceException e) {
-            System.err.println("Error preloading data: " + e.getMessage());
+        List<Vehicle> dbVehicles = DatabaseHandler.getAllVehicles();
+
+        for (Vehicle v : dbVehicles) {
+            if (v instanceof Car) {
+                carInventory.add(v);
+            } else {
+                motoInventory.add(v);
+            }
         }
-
         statusLabel.setText("Total Vehicles: " + Vehicle.getTotalVehicles());
     }
 
@@ -61,23 +65,17 @@ public class DealershipController {
             }
 
             double price = Double.parseDouble(priceField.getText());
-            Vehicle newVehicle;
 
             if (isMotoCheckBox.isSelected()) {
-                newVehicle = new Motorcycle(make, model, price, false);
-                motoInventory.add(newVehicle);
+                DatabaseHandler.addVehicleRaw("Motorcycle", make, model, price, 0);
             } else {
-                newVehicle = new Car(make, model, price);
-                carInventory.add(newVehicle);
+                DatabaseHandler.addVehicleRaw("Car", make, model, price, 4);
             }
 
-            statusLabel.setText("Total Vehicles: " + Vehicle.getTotalVehicles());
+            refreshListsFromDB();
+
             makeField.clear(); modelField.clear(); priceField.clear();
 
-        } catch (InvalidPriceException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Custom Error: " + ex.getMessage());
-            alert.show();
         } catch (NumberFormatException nfe) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Please enter a valid numeric price.");
@@ -87,24 +85,18 @@ public class DealershipController {
 
     @FXML
     void onCarListSelection(MouseEvent event) {
-        // Deselect the motorcycle list so only one item is selected globally
         motoListView.getSelectionModel().clearSelection();
-
         Vehicle selected = carListView.getSelectionModel().getSelectedItem();
         displayDetails(selected);
     }
 
-    // Logic for when user clicks on the MOTORCYCLE list
     @FXML
     void onMotoListSelection(MouseEvent event) {
-        // Deselect the car list
         carListView.getSelectionModel().clearSelection();
-
         Vehicle selected = motoListView.getSelectionModel().getSelectedItem();
         displayDetails(selected);
     }
 
-    // Helper method to show info in the text area
     private void displayDetails(Vehicle selected) {
         if (selected != null) {
             String pitch = activeSalesman.makeSalesPitch(selected, 10.0);
@@ -119,35 +111,26 @@ public class DealershipController {
 
     @FXML
     void onSellVehiclePress() {
-        // Check which list has a selection
         Vehicle selectedCar = carListView.getSelectionModel().getSelectedItem();
         Vehicle selectedMoto = motoListView.getSelectionModel().getSelectedItem();
 
-        if (selectedCar == null && selectedMoto == null) {
+        Vehicle toDelete = (selectedCar != null) ? selectedCar : selectedMoto;
+
+        if (toDelete == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Please select a vehicle to sell first.");
             alert.show();
             return;
         }
 
-        // Remove from the correct list
-        if (selectedCar != null) {
-            carInventory.remove(selectedCar);
-        } else {
-            motoInventory.remove(selectedMoto);
-        }
-
-        // Update totals and clear UI
+        DatabaseHandler.deleteVehicle(toDelete.make, toDelete.model);
         Vehicle.decrementTotal();
-        statusLabel.setText("Total Vehicles: " + Vehicle.getTotalVehicles());
+
+        refreshListsFromDB();
         detailsArea.clear();
 
-        // Clear selections
-        carListView.getSelectionModel().clearSelection();
-        motoListView.getSelectionModel().clearSelection();
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Vehicle sold successfully!");
+        alert.setContentText("Vehicle sold and removed from Database!");
         alert.show();
     }
 }
